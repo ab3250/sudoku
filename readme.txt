@@ -1,4 +1,4 @@
-Two versions of python sudoku solver ported to guile scheme, works in racket rsr7.
+Two versions of python sudoku solver ported to guile scheme.
 
 Version three is version one without call/cc.
 It is not yet working.

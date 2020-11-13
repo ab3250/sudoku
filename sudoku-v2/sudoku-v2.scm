@@ -1,17 +1,9 @@
 ;;;;
-;;racket uncomment following
-#|
-#lang r7rs
-(import (scheme base)
-        (scheme write)        
-        (scheme private list)
-        (scheme process-context))
-|#
 
 (include "../library/sudoku-library.scm")
 
 (define (solve)
-  (define zero (position 0 (flatten (array->list grid))))
+  (define zero (position-9x9 0 (array->list (array-contents grid))))
   (if (not(not zero))
       (let ((row (car zero))(col (cdr zero)))
         (for 1 9 (lambda(num)                            

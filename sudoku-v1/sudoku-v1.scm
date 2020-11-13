@@ -1,12 +1,4 @@
 ;;;;
-;racket uncomment the following
-#|
-#lang r7rs
-(import (scheme base)
-        (scheme write)        
-        (scheme private list)
-        (scheme process-context))
-|#
 
 (include "../library/sudoku-library.scm")
 
@@ -26,7 +18,7 @@
                                     (begin
                                       (array-set! grid num row col)
                                       (solve)
-                                      (if (and (not(member 0 (flatten (array->list grid))))) (begin (print-grid)(exit)));hack
+                                       (if (not(member 0  (array->list (array-contents grid)))) (begin (print-grid)(exit)));hack
                                       (array-set! grid 0 row col)))
                                 (num-loop (+ 1 num)))
                               (return)))#f)

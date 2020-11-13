@@ -1,12 +1,4 @@
 ;;;;
-;racket uncomment the following
-#|
-#lang r7rs
-(import (scheme base)
-        (scheme write)        
-        (scheme private list)
-        (scheme process-context))
-|#
 
 (include "../library/sudoku-library.scm")
 

@@ -1,24 +1,14 @@
 ;library for sudoku version one and two
 
-(define puzzle '((5 3 0 0 7 0 0 0 0)
-                 (6 0 0 1 9 5 0 0 0)
-                 (0 9 8 0 0 0 0 6 0)
-                 (8 0 0 0 6 0 0 0 3)
-		 (4 0 0 8 0 3 0 0 1)
-                 (7 0 0 0 2 0 0 0 6)
-                 (0 6 0 0 0 0 2 8 0)
-                 (0 0 0 4 1 9 0 0 5)
-                 (0 0 0 0 8 0 0 7 9)))
-
-(cond-expand
-  (racket
-	  (include "../library/63.sld")
-	  (define second cadr)
-	  (define grid (list->array 2 '#(9) puzzle)))
-    (guile
-    (define grid (list->array 2 puzzle)) )
-    (else)
-    )
+(define grid (list->array 2 '((5 3 0 0 7 0 0 0 0)
+			      (6 0 0 1 9 5 0 0 0)
+			      (0 9 8 0 0 0 0 6 0)
+			      (8 0 0 0 6 0 0 0 3)
+			      (4 0 0 8 0 3 0 0 1)
+			      (7 0 0 0 2 0 0 0 6)
+			      (0 6 0 0 0 0 2 8 0)
+			      (0 0 0 4 1 9 0 0 5)
+			      (0 0 0 0 8 0 0 7 9))))
 
 (define-syntax let/ec 
   (syntax-rules ()
@@ -27,17 +17,12 @@
       (lambda (return)
         body ...)))))
 
-(define (flatten x)
-  (cond ((null? x) '())
-        ((pair? x) (append (flatten (car x)) (flatten (cdr x))))
-        (else (list x))))
-
 (define for (lambda (start end func)
               (let loop ((index start))
                 (if (> index end) #t
                     (begin (func index) (loop (+ index 1))) ))))
 
-(define (position val li2)
+(define (position-9x9 val li2)
   (let loop ((li li2)(count 0))
     (cond ((null? li) #f)
           ((equal? val (car li))
