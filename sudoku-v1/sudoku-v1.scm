@@ -18,7 +18,7 @@
                                     (begin
                                       (array-set! grid num row col)
                                       (solve)
-                                       (if (not(member 0  (array->list (array-contents grid)))) (begin (print-grid)(exit)));hack
+                                      (unless(position-9x9 0 (array->list (array-contents grid)))(print-grid))
                                       (array-set! grid 0 row col)))
                                 (num-loop (+ 1 num)))
                               (return)))#f)
@@ -26,3 +26,6 @@
             (row-loop (+ row 1)))#f))))
 (print-grid)
 (solve)
+(newline)
+(display "finished")
+(newline)

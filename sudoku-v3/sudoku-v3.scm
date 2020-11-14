@@ -3,6 +3,7 @@
 (include "../library/sudoku-library.scm")
 
 (define (solve)
+  (let/ec return
     (let row-loop ((row 0))
       (if (not (eqv? 9 row))
           (begin	  
@@ -16,14 +17,13 @@
                                 (if (possible? row col num)
                                     (begin
                                       (array-set! grid num row col)
-				      (print-grid)
-                                      (solve)
-                                      (if (and (not(member 0  (array->list (array-contents grid))))) (begin (print-grid)(exit)));hack
+                                      (solve)				      
+				      (unless(position-9x9 0 (array->list (array-contents grid)))(print-grid))
                                       (array-set! grid 0 row col)))
                                 (num-loop (+ 1 num)))
-                          ))#f)
+                              (return)))#f)
                     (col-loop (+ col 1)))#f))
-            (row-loop (+ row 1)))#f))#f)
+            (row-loop (+ row 1)))#f))))
 (print-grid)
 (solve)
-
+(display "done")
